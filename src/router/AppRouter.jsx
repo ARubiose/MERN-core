@@ -4,27 +4,44 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { AuthRoutes } from '../auth/routes/AuthRoutes';
 import { AppRoutes } from '../template/routes/AppRoutes';
 
-import { statusEnum, useCheckAuth } from '../hooks/useCheckAuth';
+import { statusEnum } from '../store/auth/authSlice';
+import { useAuthStore } from '../hooks';
 
 /**
- * Main router
- * @returns
+ * Main router for Authentication and Application routes
+ * @returns {React.ReactElement} Routes
  */
 export const AppRouter = () => {
+    // Hooks
+    const { status, checkAuthToken } = useAuthStore();
 
-    const { status } = useCheckAuth()
+    useEffect(() => {
+        checkAuthToken();
+    }, []);
+
+    // Auth Loading screen
+    if (status === statusEnum.checkingAuthentication) return <h1>Loading</h1>;
 
     return (
         <Routes>
-            {/* Authentication and Application routes */}
-            {status === statusEnum.authenticated ? (
-                <Route path="/*" element={<AppRoutes />} />
-            ) : (
-                <Route path="/auth/*" element={<AuthRoutes />} />
-            )}
+            {   
+                status === statusEnum.authenticated 
+                ?   (
+                    <>
+                        <Route path="/" element={<AppRoutes />} />
+                        {/* Default route */}
+                        <Route path="/*" element={<Navigate to="/" />} />
+                    </>
+                    )
 
-            {/* Default route */}
-            <Route path="/*" element={<Navigate to="/auth/login" />} />
+                /*User authenticated  */
+                :   ( 
+                    <>
+                        <Route path="/auth/*" element={<AuthRoutes />} />
+                        {/* Default route */}
+                        <Route path="/*" element={<Navigate to="/auth/login" />} />
+                    </>
+            )}
         </Routes>
     );
 };
