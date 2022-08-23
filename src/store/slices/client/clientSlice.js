@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     isLoading: false,
     clients: [],
-    fields: ['id', 'name', 'surname', 'description'],
+    fields: ['id', 'name', 'surname', 'description'], // Client interface
 };
 
 export const clientSlice = createSlice({

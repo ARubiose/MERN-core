@@ -12,7 +12,6 @@ import Paper from '@mui/material/Paper';
 
 import { useClientStore } from '../../hooks/useClientStore';
 import { usePagination } from '../../hooks/usePagination';
-import { TablePagination } from '@mui/material';
 
 /**
  * Table to be used with Hook data fetching - Additional functionality

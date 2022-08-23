@@ -14,7 +14,6 @@ export const TabbedDashboard = ({ tabs }) => {
     const [tabIndex, setTabIndex] = useState(0);
 
     const onTabChange = (event, newTabIndex) => {
-        console.log(event.target);
         setTabIndex(newTabIndex);
     };
 
