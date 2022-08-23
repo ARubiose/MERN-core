@@ -14,7 +14,6 @@ export const uiSlice = createSlice({
     clearErrorMessage: ( state )=> {
         state.errorMessage = ''
     },
-
   }
 });
 

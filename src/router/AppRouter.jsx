@@ -28,9 +28,9 @@ export const AppRouter = () => {
                 status === statusEnum.authenticated 
                 ?   (
                     <>
-                        <Route path="/" element={<AppRoutes />} />
+                        <Route path="/dashboard" element={<AppRoutes />} />
                         {/* Default route */}
-                        <Route path="/*" element={<Navigate to="/" />} />
+                        <Route path="/*" element={<Navigate to="/dashboard" />} />
                     </>
                     )
 
